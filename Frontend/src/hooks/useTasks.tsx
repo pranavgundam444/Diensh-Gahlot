@@ -1,7 +1,17 @@
-import { useEffect, useState, useCallback } from 'react';
-import * as taskService from '../services/taskService';
+import { useEffect, useState, useCallback } from "react";
+import * as taskService from "../services/taskService";
 
-type RawTask = any;
+type Priority = "No Priority" | "Urgent" | "High" | "Medium" | "Low";
+
+type RawTask = {
+  id: string;
+  title: string;
+  assignee: string;
+  dueDate: string;
+  priority: Priority;
+  tags: string[];
+  raw: any;
+};
 
 export type Column = {
   id: number;
@@ -9,7 +19,7 @@ export type Column = {
   tasks: RawTask[];
 };
 
-const STATUS_TITLES = ['To Do', 'Doing', 'Completed', 'On Hold'];
+const STATUS_TITLES = ["To Do", "Doing", "Completed", "On Hold"];
 
 export function useTasks() {
   const [columns, setColumns] = useState<Column[]>([]);
@@ -19,30 +29,41 @@ export function useTasks() {
   const fetchTasks = useCallback(async (search?: string) => {
     setLoading(true);
     setError(null);
+
     try {
       const tasks = await taskService.getTasks(search);
 
-      // map tasks into columns
-      const grouped = STATUS_TITLES.map((title, idx) => ({ id: idx + 1, title, tasks: [] }));
+      // Explicitly type the grouped columns so tasks is not inferred as never[]
+      const grouped: Column[] = STATUS_TITLES.map((title, idx) => ({
+        id: idx + 1,
+        title,
+        tasks: [],
+      }));
 
       tasks.forEach((t: any) => {
-        const mapped = {
+        const mapped: RawTask = {
           id: t._id,
           title: t.title,
-          assignee: t.assignee || '',
-          dueDate: t.dueDate ? new Date(t.dueDate).toLocaleDateString(undefined, { day: '2-digit', month: 'short' }) : '',
-          priority: t.priority || 'No Priority',
+          assignee: t.assignee || "",
+          dueDate: t.dueDate
+            ? new Date(t.dueDate).toLocaleDateString(undefined, {
+                day: "2-digit",
+                month: "short",
+              })
+            : "",
+          priority: (t.priority || "No Priority") as Priority,
           tags: t.labels || [],
           raw: t,
         };
 
         const col = grouped.find((c) => c.title === t.status) || grouped[0];
+
         col.tasks.push(mapped);
       });
 
       setColumns(grouped);
     } catch (err: any) {
-      setError(err.message || 'Unable to load tasks');
+      setError(err.message || "Unable to load tasks");
     } finally {
       setLoading(false);
     }
@@ -54,12 +75,18 @@ export function useTasks() {
 
   useEffect(() => {
     const refreshHandler = () => fetchTasks();
-    const searchHandler = (e: any) => fetchTasks(e?.detail?.search || '');
-    window.addEventListener('tasks:refresh', refreshHandler);
-    window.addEventListener('tasks:search', searchHandler as EventListener);
+
+    const searchHandler = (e: any) => fetchTasks(e?.detail?.search || "");
+
+    window.addEventListener("tasks:refresh", refreshHandler);
+    window.addEventListener("tasks:search", searchHandler as EventListener);
+
     return () => {
-      window.removeEventListener('tasks:refresh', refreshHandler);
-      window.removeEventListener('tasks:search', searchHandler as EventListener);
+      window.removeEventListener("tasks:refresh", refreshHandler);
+      window.removeEventListener(
+        "tasks:search",
+        searchHandler as EventListener,
+      );
     };
   }, [fetchTasks]);
 
@@ -81,5 +108,13 @@ export function useTasks() {
     return res;
   };
 
-  return { columns, loading, error, fetchTasks, create, update, remove };
+  return {
+    columns,
+    loading,
+    error,
+    fetchTasks,
+    create,
+    update,
+    remove,
+  };
 }

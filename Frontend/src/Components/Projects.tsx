@@ -45,10 +45,10 @@ const priorityStyles: Record<string, string> = {
 const Projects = () => {
   const [projects, setProjects] = useState(initialProjects);
 
-  const [search, setSearch] = useState("");
-  const [selectedPriority, setSelectedPriority] = useState("All");
+  const [search] = useState("");
+  const [selectedPriority] = useState("All");
 
-  const [visibleColumns, setVisibleColumns] = useState({
+  const [visibleColumns] = useState({
     priority: true,
     lead: true,
     status: true,
