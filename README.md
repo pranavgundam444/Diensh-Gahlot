@@ -1,52 +1,18 @@
-# AbleSpace - Task Management Application
+# Dinesh Gahlot – Task Management Application
 
-AbleSpace is a full-stack task management application built with React, TypeScript, Tailwind CSS, NestJS, MongoDB, and REST APIs.
+A full-stack task management application developed as part of the technical assignment for **Dinesh Gahlot**.
 
 The application provides a workspace-style interface for managing tasks, viewing task details, updating task properties, searching tasks, and organizing tasks based on status and priority.
 
----
+## Live Demo
 
-## Features
+- **Frontend:** [PASTE YOUR VERCEL URL HERE]
+- **Backend API:** https://ablespace-backend-h0ah.onrender.com
+- **Swagger API Documentation:** https://ablespace-backend-h0ah.onrender.com/api
 
-### Task Management
+## GitHub Repository
 
-- View tasks in a workspace-style interface
-- Create new tasks
-- View individual task details
-- Edit existing tasks
-- Delete tasks
-- Search tasks
-- Organize tasks by status
-- Set task priority
-- Assign tasks
-- Set due dates
-- Add labels
-
-### Task Details
-
-Each task has a dedicated details page where users can view and update:
-
-- Title
-- Description
-- Status
-- Priority
-- Assignee
-- Due date
-- Labels
-
-### Projects
-
-The application includes a Projects section following the provided workspace-style UI.
-
-### API Documentation
-
-The backend includes Swagger/OpenAPI documentation for exploring and testing the available REST APIs.
-
-Swagger documentation is available at:
-
-https://ablespace-backend-h0ah.onrender.com/api
-
----
+This repository contains the complete source code for the frontend and backend.
 
 ## Tech Stack
 
@@ -55,8 +21,8 @@ https://ablespace-backend-h0ah.onrender.com/api
 - React
 - TypeScript
 - Vite
-- Tailwind CSS
 - React Router
+- Tailwind CSS
 - Lucide React
 - REST API integration
 
@@ -64,12 +30,12 @@ https://ablespace-backend-h0ah.onrender.com/api
 
 - NestJS
 - TypeScript
-- MongoDB
 - Mongoose
+- MongoDB
 - REST APIs
-- Class Validator
 - Swagger / OpenAPI
-- CORS
+- Class Validator
+- Class Transformer
 
 ### Database
 
@@ -79,14 +45,49 @@ https://ablespace-backend-h0ah.onrender.com/api
 
 - Frontend: Vercel
 - Backend: Render
-- Database: MongoDB Atlas
 
----
+## Features
+
+### Task Management
+
+- View tasks in a board-style layout
+- View tasks in a list layout
+- Create new tasks
+- View individual task details
+- Edit existing tasks
+- Delete tasks
+- Search tasks
+- Update task status
+- Set task priority
+- Assign tasks
+- Add due dates
+- Add labels to tasks
+
+### Task Statuses
+
+Tasks can be organized into:
+
+- To Do
+- Doing
+- Completed
+- On Hold
+
+### Priority Levels
+
+- No Priority
+- Urgent
+- High
+- Medium
+- Low
+
+### Projects
+
+The application includes a Projects section with a workspace-style UI for organizing and displaying project-related information.
 
 ## Project Structure
 
 ```text
-AbleSpace/
+Dinesh-Gahlot/
 │
 ├── Backend/
 │   ├── src/
@@ -94,159 +95,182 @@ AbleSpace/
 │   │   ├── app.module.ts
 │   │   ├── main.ts
 │   │   └── seed.ts
-│   │
-│   ├── .env
 │   ├── .env.example
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── tsconfig.json
-│   └── tsconfig.tsbuildinfo
+│   └── ...
 │
 ├── Frontend/
-│   ├── public/
 │   ├── src/
-│   │   ├── assets/
 │   │   ├── Components/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── assets/
 │   │   └── ...
-│   │
+│   ├── public/
 │   ├── package.json
 │   ├── package-lock.json
-│   └── vite.config.ts
+│   ├── vite.config.ts
+│   └── ...
 │
 └── README.md
 
-Getting Started
-
-These instructions are intended to work from a clean clone of the repository.
-
-Prerequisites
-
-Make sure the following are installed:
-
-Node.js
-npm
-Git
-MongoDB Atlas account or another MongoDB instance
-Backend Setup
-1. Navigate to the Backend directory
-cd Backend
-2. Install dependencies
-npm install
-3. Configure environment variables
-
-Create a .env file inside the Backend directory.
-
-Use the following structure:
-
-MONGODB_URI=your_mongodb_connection_string
-PORT=3000
-CORS_ORIGIN=http://localhost:5173
-
-The repository includes a .env.example file that can be used as a reference.
-
-For MongoDB Atlas, the connection string will look similar to:
-
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/ablespace
-
-Do not commit your actual .env file or database credentials to the repository.
-
-4. Start the backend in development mode
-npm run start:dev
-
-The backend will run at:
-
-http://localhost:3000
-
-Swagger API documentation will be available at:
-
-http://localhost:3000/api
-5. Build the backend
-npm run build
-
-The production build will be generated in the dist directory.
-
-Frontend Setup
-
-Open another terminal and navigate to the Frontend directory:
-
-cd Frontend
-1. Install dependencies
-npm install
-2. Configure the API URL
-
-Create a .env file inside the Frontend directory:
-
-VITE_API_URL=http://localhost:3000
-
-This variable tells the frontend which backend API to communicate with.
-
-3. Start the frontend
-npm run dev
-
-The frontend will normally be available at:
-
-http://localhost:5173
-4. Build the frontend
-npm run build
-
-The production build will be generated in:
-
-dist/
 API Endpoints
 
 The backend provides REST APIs for task management.
 
 Method	Endpoint	Description
 GET	/tasks	Get all tasks
-GET	/tasks/:id	Get a specific task
-POST	/tasks	Create a new task
+GET	/tasks/:id	Get a single task
+POST	/tasks	Create a task
 PATCH	/tasks/:id	Update a task
 DELETE	/tasks/:id	Delete a task
 
-The API can also be explored and tested through Swagger:
+The API can also be explored and tested through Swagger.
+
+Swagger Documentation
+
+Swagger/OpenAPI documentation is available at:
 
 https://ablespace-backend-h0ah.onrender.com/api
-Implementation Decisions and Assumptions
+
+Swagger provides an interactive interface for viewing and testing the available API endpoints.
+
+Environment Variables
+Backend
+
+Create a .env file inside the Backend directory:
+
+MONGODB_URI=your_mongodb_connection_string
+PORT=5000
+CORS_ORIGIN=http://localhost:5173
+Frontend
+
+Create a .env file inside the Frontend directory:
+
+VITE_API_URL=http://localhost:5000
+
+For production, VITE_API_URL should point to the deployed backend URL.
+
+Local Setup
+
+The following instructions are intended to work from a clean clone of the repository.
+
+1. Clone the repository
+git clone YOUR_GITHUB_REPOSITORY_URL
+cd Dinesh-Gahlot
+2. Setup the Backend
+
+Navigate to the backend directory:
+
+cd Backend
+
+Install dependencies:
+
+npm install
+
+Create a .env file:
+
+MONGODB_URI=your_mongodb_connection_string
+PORT=5000
+CORS_ORIGIN=http://localhost:5173
+
+Start the backend in development mode:
+
+npm run start:dev
+
+The backend will run at:
+
+http://localhost:5000
+
+Swagger documentation will be available at:
+
+http://localhost:5000/api
+3. Setup the Frontend
+
+Open another terminal and navigate to the frontend:
+
+cd Frontend
+
+Install dependencies:
+
+npm install
+
+Create a .env file:
+
+VITE_API_URL=http://localhost:5000
+
+Start the frontend:
+
+npm run dev
+
+The frontend will normally be available at:
+
+http://localhost:5173
+Production Build
+Backend
+
+From the Backend directory:
+
+npm run build
+Frontend
+
+From the Frontend directory:
+
+npm run build
+
+Both projects were successfully built using their respective production build commands.
+
+Decisions and Assumptions
 
 A few implementation decisions and assumptions were made during development:
 
-MongoDB with Mongoose was used for persistent task storage so that task data remains available after refreshing the application.
+MongoDB with Mongoose was used for persistent task storage.
 The frontend and backend were kept as separate applications to maintain a clear separation between the user interface and REST API.
-React Router was used to handle navigation between the task list, task details, and project views.
+React Router was used for navigation between task and project views.
 Task statuses and priorities use predefined values to keep the UI and API data consistent.
-Environment variables are used for database credentials, API URLs, ports, and CORS configuration instead of hard-coding deployment-specific values.
+Environment variables are used for database credentials, API URLs, ports, and CORS configuration.
 Swagger was added to provide interactive API documentation and make the backend endpoints easier to test.
-The Projects section was implemented as part of the workspace UI based on the provided design.
+The Projects section was implemented as part of the workspace-style UI.
 What I Would Improve With More Time
 
-If I had more time, I would improve the application by adding:
+If I had more time, I would further improve the application by adding:
 
 User authentication and authorization
-User-specific workspaces and tasks
-More complete project management functionality
-Drag-and-drop task movement between statuses
+User-specific tasks and projects
 More advanced filtering and sorting
+Drag-and-drop task management
 Pagination for larger datasets
-More comprehensive form validation
-Improved error handling and user feedback
-Automated unit and integration tests
-More responsive/mobile-specific UI improvements
-CI/CD checks for testing, linting, and production builds
-Development Time
+More comprehensive form validation and error handling
+Unit and integration tests
+Improved mobile responsiveness
+More detailed project management functionality
+Activity history and task comments
+CI/CD integration and automated testing
+Time Spent
 
-The project took approximately 6 hours to design, implement, test, debug, and deploy.
+Approximately 6 hours were spent designing, developing, integrating, testing, debugging, and deploying the application.
 
 What I Learned
 
-One of the most interesting parts of the project was working with NestJS, Mongoose, and Swagger together.
+One of the interesting parts of the project was integrating a React frontend with a NestJS backend and connecting the backend to MongoDB using Mongoose.
 
-I learned how NestJS modules and controllers can be combined with Mongoose schemas to build a structured REST API, while Swagger can automatically provide interactive documentation for the API.
+I also worked with Swagger/OpenAPI documentation while building the REST API. It provided a useful way to test and understand the backend endpoints independently of the frontend.
 
-I also learned more about deploying a full-stack application with the frontend and backend deployed as separate services, and how environment variables and CORS are used to connect them securely.
+Another useful learning experience was deploying the frontend and backend as separate services and configuring communication between them using environment variables and CORS.
+
+Security
+
+Sensitive environment variables such as database credentials are not committed to the repository.
+
+A .env.example file is provided to show the required environment variables without exposing actual credentials.
+
+The actual .env files should never be committed to Git.
 
 Deployment
 
-The application is deployed using the following architecture:
+The application is deployed using:
 
 React + Vite Frontend
         |
@@ -271,42 +295,3 @@ Swagger API documentation:
 https://ablespace-backend-h0ah.onrender.com/api
 
 The production frontend communicates with the deployed backend through the VITE_API_URL environment variable.
-
-Environment Variables
-Backend
-MONGODB_URI=
-PORT=3000
-CORS_ORIGIN=http://localhost:5173
-Frontend
-VITE_API_URL=http://localhost:3000
-
-For production deployment, the frontend API URL is configured to point to the deployed Render backend.
-
-Security
-
-Sensitive credentials are not included in the source code.
-
-Environment variables are used for:
-
-MongoDB connection credentials
-Backend configuration
-Frontend API URL
-CORS configuration
-
-The actual .env files containing secrets should never be committed to Git.
-
-The repository contains .env.example files as references for the required environment variables.
-
-Final Notes
-
-The project was developed as a full-stack task management application with a focus on:
-
-Clean and reusable React components
-REST API integration
-Persistent MongoDB storage
-Structured NestJS backend architecture
-Interactive API documentation
-Workspace-style UI
-Production deployment
-
-The frontend and backend have both been built successfully and deployed for production use.
