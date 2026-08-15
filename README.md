@@ -310,35 +310,3 @@ Workspace-style UI
 Production deployment
 
 The frontend and backend have both been built successfully and deployed for production use.
-
-
-
-### One important thing before you push
-
-
-I noticed your VS Code screenshot shows:
-
-
-```text
-Backend/
-  .env
-  .env.example
-
-Make absolutely sure .env is in .gitignore and is NOT present on GitHub.
-
-Your GitHub repository should have:
-
-.env.example     ✅
-.env             ❌
-
-Also check that your MongoDB password is not visible in the GitHub repository or README.
-
-Then simply save the file as:
-
-AbleSpace/README.md
-
-and run:
-
-git add README.md
-git commit -m "Add project README and setup instructions"
-git push
